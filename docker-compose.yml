@@ -1,0 +1,72 @@
+version: "3.9"
+networks:
+  tplus-ss-481:
+
+services:
+  eureka:
+    build: ./yethi-service-discovery
+    image: yethi-service-discovery
+    container_name: eureka
+    ports:
+      - 8761:8761
+    networks:
+      - tplus-ss-481
+  tplus-api-gateway:
+    build: ./tplus-api-gateway
+    image: tplus-api-gateway
+    container_name: tplus-api-gateway
+    ports:
+      - 6060:6060
+    environment:
+      spring.cloud.config.uri: http://192.168.0.23:6061
+      spring.cloud.config.label: dev-ss-481
+    networks:
+      - tplus-ss-481
+
+  tplus-identity-service:
+    build: ./tplus-identity-service
+    image: tplus-identity-service
+    container_name: tplus-identity-service
+    ports:
+      - 7070:7070
+    environment:
+      spring.cloud.config.uri: http://192.168.0.23:6061
+      spring.cloud.config.label: dev-ss-481
+    networks:
+      - tplus-ss-481
+
+  tplus-project-service:
+    build: ./tplus-project-service
+    image: tplus-project-service
+    container_name: tplus-project-service
+    ports:
+      - 7075:7075
+    environment:
+      spring.cloud.config.uri: http://192.168.0.23:6061
+      spring.cloud.config.label: dev-ss-481
+    networks:
+      - tplus-ss-481
+
+  tplus-test-builder-service:
+    build: ./tplus-test-builder-service
+    image: tplus-test-builder-service
+    container_name: tplus-test-builder-service
+    ports:
+      - 6565:6565
+    environment:
+      spring.cloud.config.uri: http://192.168.0.23:6061
+      spring.cloud.config.label: dev-ss-481
+    networks:
+      - tplus-ss-481
+
+  tplus-app-service:
+    build: ./tplus-app-service
+    image: tplus-app-service
+    container_name: tplus-app-service
+    ports:
+      - 7778:7778
+    environment:
+      spring.cloud.config.uri: http://192.168.0.23:6061
+      spring.cloud.config.label: dev-ss-481
+    networks:
+      - tplus-ss-481
