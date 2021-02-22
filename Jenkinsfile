@@ -1,5 +1,5 @@
 pipeline {
-    agent {label 'naveen-machine'}
+    agent {label 'Naveen-machine'}
     
     environment {
         REPOSITORY="git@gitlab.com:tenjinonline"
