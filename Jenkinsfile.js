@@ -18,8 +18,7 @@ pipeline {
                         }
                     }
                 }
-            
-        }
+            }
 
         stage ('Build all docker images') {
             steps {
@@ -31,7 +30,7 @@ pipeline {
             steps {
                 bat "docker-compose down"
                 bat "docker-compose up -d"
-            }
-        }
+            }               
      }
+	}
 }
